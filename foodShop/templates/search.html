@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{%  load static %}
+
+ {%  block search %}
+        <li id="searchform" style="margin: 15px;">
+          <div>
+            <form action="{%  url 'search' %}" method="get" class="form-control">
+              <fieldset>
+                <legend>Quick Search:</legend>
+                <input type="text" placeholder="Search" name="q" ><br>
+                <button type="submit" class="btn tm-btn">Search&nbsp;<i class="fas fa-search"></i></button>
+              </fieldset>
+            </form>
+          </div>
+        </li
+          {% endblock %}
+
+{%  block navbar %}
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active"><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="drop" href="#">Filter</a>
+            <ul>
+                <li><a href="/">All</a></li>
+            </ul>
+          </li>
+            <li class="active"><a href="{% url 'home' %}">Cart&nbsp;<i class="fas fa-shopping-cart"></i></a></li>
+        <li class="active"><a href="{% url 'home' %}">Register&nbsp;<i class="fas fa-edit"></i></a></li>
+        <li class="active "><a href="{% url 'home' %}">Login&nbsp;<i class="fas fa-sign-in-alt"></i></a></li>
+        </ul>
+      </nav>
+{%  endblock %}
+
+{%  block content %}
+
+<div class="wrapper row3" >
+  <main class="hoc container clear">
+    <!-- main body -->
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+        {% for i in pro %}
+        <li class="one_third">
+          <figure><a class="imgover" href={{ i.get_absolute_url }}><img src="{{ i.image.url }}" alt="" style="height:350px; width: 500px; margin-top: 40px; "></a></figure>
+            <figcaption>
+              <h6 class="heading" style="padding: 10px;"><b>{{i.name}}</b></h6>
+              <div>
+                <p style="font-family: sans-serif">{{i.desc|truncatewords:10}}</p>
+              </div>
+                <p>price {{ i.price }} Rs</p>
+
+                <br>
+            </figcaption>
+
+        </li>
+          {% endfor %}
+      </ul>
+    </section>
+    <div class="clear"></div>
+  </main>
+</div>
+
+{% endblock %}
+
+{#<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>#}
+{#<!-- JAVASCRIPTS -->#}
+{#<script src="{% static 'hm/layout/scripts/jquery.min.js' %}"></script>#}
+{#<script src="{% static 'hm/layout/scripts/jquery.backtotop.js' %}"></script>#}
+{#<script src="{% static 'hm/layout/scripts/jquery.mobilemenu.js' %}"></script>#}
+{#</body>#}
+{#</html>#}

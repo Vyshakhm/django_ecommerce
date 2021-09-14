@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{%  load static %}
+{#<!DOCTYPE html>#}
+{#<html lang="">#}
+{#<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->#}
+{#<head>#}
+{#<title>Nocobot</title>#}
+{#<meta charset="utf-8">#}
+{#<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">#}
+{#<link href="{% static 'hm/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">#}
+{#</head>#}
+{#<body id="top">#}
+{#<div class="wrapper row0">#}
+{#  <div id="topbar" class="hoc clear">#}
+{#    <div class="fl_right">#}
+{#      <ul class="nospace">#}
+{#        <li><a href="#" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>#}
+{#        <li><a href="#" title="Sign Up"><i class="fas fa-edit"></i></a></li>#}
+{% block search %}
+        <li id="searchform" style="margin: 15px;">
+          <div>
+            <form action="{%  url 'search' %}" method="get" class="form-control">
+              <fieldset>
+                <legend>Quick Search:</legend>
+                <input type="text" placeholder="Search" name="q" ><br>
+                <button type="submit" class="btn tm-btn">Search&nbsp;<i class="fas fa-search"></i></button>
+              </fieldset>
+            </form>
+          </div>
+        </li>
+{% endblock %}
+{#      </ul>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{#<!-- Top Background Image Wrapper -->#}
+{#<div class="bgded" style="background-image:url({% static 'hm/images/demo/backgrounds/01.png' %});">#}
+{#  <div class="wrapper row1">#}
+{#    <header id="header" class="hoc clear">#}
+{#      <div id="logo" class="fl_left">#}
+{#        <h1><a href="index.html">FoodShop</a></h1>#}
+{#      </div>#}
+{%  block navbar %}
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active"><a href="{% url 'home' %}"><i class="fas fa-home"></i>&nbsp;Home</a></li>
+          <li><a class="drop" href="#">Filter</a>
+            <ul>
+                <li><a href="/">All</a></li>
+                {%  for j in ct %}
+                    <li><a href={{ j.get_absolute_url }}>{{ j.name }}</a></li>
+                {% endfor %}
+            </ul>
+          </li>
+        <li class="active"><a href="{% url 'cartdetails' %}">Cart&nbsp;<i class="fas fa-shopping-cart">&nbsp;{{ itc }}</i></a></li>
+        {% if user.is_authenticated %}
+            <li class="active">Hello {{ user.username }}</li>
+            <li class="active "><a href="{% url 'logout' %}">Logout&nbsp;<i class="fas fa-sign-out-alt"></i></a></li>
+        {% else %}
+            <li class="active"><a href="{% url 'register' %}">Register&nbsp;<i class="fas fa-edit"></i></a></li>
+            <li class="active "><a href="{% url 'login' %}">Login&nbsp;<i class="fas fa-sign-in-alt"></i></a></li>
+        {% endif %}
+        </ul>
+      </nav>
+{%  endblock %}
+{#    </header>#}
+{#  </div>#}
+
+{%  block content %}
+
+  <div class="overlay">
+    <div id="pageintro" class="hoc clear">
+      <!-- ################################################################################################ -->
+      <article>
+        <h3 class="heading">Visit & Grab some snacks</h3>
+        <p>Find Your Favourite here..!All kind of foods are easly available on a click. Contact us</p>
+        <footer><a  class="btn" href="#">Buy Food</a></footer>
+      </article>
+    </div>
+  </div>
+
+</div>
+
+
+{# <div class="category">#}
+{# {%  for j in ct %}#}
+{# <p>#}
+{#     <b style="color: white">#}
+{#        <a href={{ j.get_absolute_url }} >{{ j.name }}</a>#}
+{#     </b>#}
+{# </p>#}
+{# {%  endfor %}#}
+{# </div>#}
+
+<!-- End Top Background Image Wrapper -->
+<div class="wrapper row3" >
+  <main class="hoc container clear">
+    <!-- main body -->
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+        {% for i in pg.object_list %}
+        <li class="one_third"  style="margin: 10px;">
+          <figure><a class="imgover" href={{ i.get_absolute_url }}><img src="{{ i.image.url }}" alt="" style="height:350px; width: 500px; "></a>
+            <figcaption>
+              <h6 class="heading" style="padding: 10px;"><b>{{i.name}}</b></h6>
+              <div>
+                <p style="font-family: sans-serif">{{i.desc|truncatewords:10}}</p>
+              </div>
+                <p>{{ i.price }}Rs</p>
+                <br>
+            </figcaption>
+            </figure>
+        </li>
+          {% endfor %}
+{#        <li class="one_third">#}
+{#          <figure><a class="imgover" href="#"><img src="{% static 'hm/images/demo/348x400.png' %}" alt=""></a>#}
+{#            <figcaption>#}
+{#              <h6 class="heading">BB</h6>#}
+{#              <div>#}
+{#                <p>qwerty</p>#}
+{#              </div>#}
+{#            </figcaption>#}
+{#          </figure>#}
+{#        </li>#}
+{#        <li class="one_third">#}
+{#          <figure><a class="imgover" href="#"><img src="{% static 'hm/images/demo/348x400.png' %}" alt=""></a>#}
+{#            <figcaption>#}
+{#              <h6 class="heading">CC</h6>#}
+{#              <div>#}
+{#                <p>qwerty</p>#}
+{#              </div>#}
+{#            </figcaption>#}
+{#          </figure>#}
+{#        </li>#}
+      </ul>
+    </section>
+    <div class="clear">
+        <center>
+        {%  for p in pg.paginator.page_range %}
+        <a href="?page={{ p }}" class="btn btn-light btn-sm" {% if pg.number == p %} activate {% endif %}>{{ p }}</a>
+        {% endfor %}
+        </center>
+    </div>
+  </main>
+</div>
+
+{% endblock %}
+
+{#<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>#}
+{#<!-- JAVASCRIPTS -->#}
+{#<script src="{% static 'hm/layout/scripts/jquery.min.js' %}"></script>#}
+{#<script src="{% static 'hm/layout/scripts/jquery.backtotop.js' %}"></script>#}
+{#<script src="{% static 'hm/layout/scripts/jquery.mobilemenu.js' %}"></script>#}
+{#</body>#}
+{#</html>#}

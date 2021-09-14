@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {%  load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="{%  static 'pr/fontawesome/css/all.min.css' %}" rel="stylesheet" />
+    <link href="{%  static 'pr/css/templatemo-comparto.css' %}" rel="stylesheet" />
+    <title> HTML CSS Template</title>
+<!--
+
+Comparto TemplateMo
+
+https://templatemo.com/tm-544-comparto
+
+-->
+</head>
+
+<body>
+    <!-- Back to top button -->
+  <br><br>
+
+        <section class="tm-mb-1" id="about">
+            <div class="tm-row tm-about-row">
+                <div class="tm-section-1-l">
+                    <img src="{{  pro.image.url }}" alt="About image" class="tm-img-responsive">
+                </div>
+                <article class="tm-section-1-r tm-bg-color-8">
+                    <h2 class="tm-mb-2 tm-title-color">{{ pro.name }}</h2>
+                    <p> {{ pro.desc }}</p>
+                    <p>Price :{{  pro.price }} Rs</p>
+                    <p>Stock :{{  pro.stock }}</p>
+                    {%  if pro.stock <= 0 %}
+                    <p style="color: #9e5406">Sorry No item left!</p>
+                    {% else %}
+                        <a href="#" class="tm-btn tm-btn-1 ">Buy</a>
+                        <a href="{% url 'add' pro.id  %}" class="tm-btn tm-btn-2 ">Add to Cart</a>
+                    {% endif %}
+                </article>
+            </div>
+        </section>
+
+</body>
+
+{%  endblock %}

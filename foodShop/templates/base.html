@@ -1,0 +1,69 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+<title>FoodShop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'hm/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body id="top">
+{#<div class="wrapper row0">#}
+{#  <div id="topbar" class="hoc clear">#}
+{#    <div class="fl_right">#}
+{#      <ul class="nospace">#}
+{#        <li><a href="#" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>#}
+{#        <li><a href="#" title="Sign Up"><i class="fas fa-edit"></i></a></li>#}
+{#          {%  block search %}#}
+{#        <li id="searchform">#}
+{#          <div>#}
+{#            <form action="{%  url 'search' %}" method="get">#}
+{#              <fieldset>#}
+{#                <legend>Quick Search:</legend>#}
+{#                <input type="text" placeholder="search ">#}
+{#                <button type="submit"><i class="fas fa-search"></i></button>#}
+{#              </fieldset>#}
+{#            </form>#}
+{#          </div>#}
+{#        </li>#}
+{#          {% endblock %}#}
+{#      </ul>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+<!-- Top Background Image Wrapper -->
+<div class="bgded" style="background-image:url({% static 'hm/images/demo/backgrounds/cherry.jpg' %}); height: auto;width: auto; background-repeat: no-repeat; ">
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+        <h1><a href="{% url 'home' %}">FoodShop</a></h1>
+      </div>
+        {%  block navbar %}
+{#      <nav id="mainav" class="fl_right">#}
+{#        <ul class="clear">#}
+{#          <li class="active"><a href="index.html">Home</a></li>#}
+{#          <li><a class="drop" href="#">Filter</a>#}
+{#            <ul>#}
+{#              <li><a href="pages/gallery.html">Gallery</a></li>#}
+{#            </ul>#}
+{#          </li>#}
+{#        </ul>#}
+{#      </nav>#}
+        {%  endblock %}
+    </header>
+  </div>
+{%  block search %}
+
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="{% static 'hm/layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.mobilemenu.js' %}"></script>
+</body>
+</html>
